@@ -2,12 +2,13 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  entry: './src/mian.js',//项目的入口文件，webpack会从main.js开始，把所有依赖的js都加载打包
+  entry: ['babel-polyfill', './src/main.js'],//项目的入口文件，webpack会从main.js开始，把所有依赖的js都加载打包
   output: {
     path: path.resolve(__dirname, './dist'),//项目的打包文件路径
     publicPath: '/dist/',//通过devServer访问路径
     filename: 'build.js'//打包后的文件名
   },
+  mode: 'development',
   devServer: {
     historyApiFallback: true,
     overlay: true
@@ -31,7 +32,7 @@ module.exports = {
         use: [
           'vue-style-loader',
           'css-loader',
-          'scss-loader'
+          'sass-loader'
         ]
       },
       {
@@ -41,7 +42,34 @@ module.exports = {
           'css-loader',
           'sass-loader?indentedSyntax'
         ]
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
       }
     ]
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

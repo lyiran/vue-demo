@@ -4,16 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --open --hot",
+    "dev": "webpack-dev-server --hot",
     "build": "webpack --progress --hide-modules"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bable-loader": "0.0.1-security",
     "vue": "^2.5.17"
   },
   "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "babel-loader": "^8.0.4",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-stage-3": "^6.24.1",
     "css-loader": "^1.0.1",
     "node-sass": "^4.10.0",
     "sass-loader": "^7.1.0",
