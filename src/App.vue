@@ -17,6 +17,7 @@
     },
     created() {
       this.fetchData();
+      console.log('23333');
     },
     methods: {
       async fetchData() {
