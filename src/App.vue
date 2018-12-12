@@ -3,6 +3,8 @@
     <h1>{{ msg }}</h1>
     <img src="./img/icon.png">
     <input type="text" v-model="msg">
+
+    <!-- <div class="test-public-path">test-public-path</div> -->
   </div>
 </template>
 
@@ -35,6 +37,10 @@
 
     h1 {
       color: green;
+    }
+
+    .test-public-path {
+      background: url('./img/icon.png');
     }
   }
 </style>

@@ -1,9 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   // entry: ['babel-polyfill', './src/main.js'],//项目的入口文件，webpack会从main.js开始，把所有依赖的js都加载打包
@@ -13,7 +14,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),//项目的打包文件路径
-    publicPath: '/dist/',//通过devServer访问路径
+    // publicPath: 'http://127.0.0.1:3000/',//通过devServer访问路径
     filename: 'build.js'//打包后的文件名
     // filename: '[name].js'//打包后的文件名
   },
@@ -31,6 +32,9 @@ module.exports = {
   },
   plugins: [
     new VueLoaderPlugin(),
+    new HtmlWebpackPlugin({
+      template: './index.html'
+    })
   ],
   module: {
     rules: [
@@ -105,7 +109,7 @@ if (process.env.NODE_ENV === 'production') {
 
   module.exports.output = {
     path: path.resolve(__dirname, './dist'),//项目的打包文件路径
-    publicPath: '/dist/',//通过devServer访问路径
+    publicPath: '/',//通过devServer访问路径
     filename: '[name].js',
     chunkFilename: '[name].js'
   };
@@ -134,6 +138,9 @@ if (process.env.NODE_ENV === 'production') {
 
   module.exports.plugins = (module.exports.plugins || []).concat([
     //预留
+    new CleanWebpackPlugin(['./dist'], {
+      verbose: true
+    })
   ]);
 }
 
