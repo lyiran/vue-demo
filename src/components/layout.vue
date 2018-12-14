@@ -14,7 +14,11 @@
         </div>
       </div>
     </div>
-    <div class="app-content">content</content></div>
+    <div class="app-content">
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </content></div>
     <div class="app-foot">footer</div>
   </div>
 </template>
@@ -104,7 +108,7 @@
     margin-top: 20px;
   }
   .head-nav {
-    float: left;
+    float: right;
   }
   .head-nav ul {
     overflow: hidden;
