@@ -14,16 +14,16 @@
           <div v-if="!product.last" class="hr"></div>
         </template>
       </div>
-      <div class="index-left-block lastest-news">
+<!--       <div class="index-left-block lastest-news">
         <h2>最新消息</h2>
         <ul>
           <li v-for="item in newsList">
             <a :href="item.url" class="new-item">{{ item.title }}</a>
           </li>
         </ul>
-      </div>
+      </div> -->
     </div>
-    <div class="index-right">
+<!--     <div class="index-right">
       <carousel :navigationEnabled="true" :perPage="1" :autoplay="true">
         <slide v-for="slide in slides" :key="slide.ky">
           <router-link :to="{name: slide.toKey}">
@@ -45,7 +45,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -53,7 +53,53 @@
   export default {
     data () {
       return {
-        msg: 'i am apple'
+        productList: {
+          pc: {
+            title: 'pc产品',
+            list: [
+              {
+                name: '数据统计',
+                url: 'http://startcraft.com'
+              },
+               {
+                name: '数据预测',
+                url: 'http://warcraft.com'
+              },
+              {
+                name: '数据分析',
+                url: 'http://overwatch.com',
+                hot: true
+              },
+              {
+                name: '广告发布',
+                url: 'http://hearstone.com'
+              }
+            ]
+          },
+          app: {
+           title: '应用类',
+           last: true,
+            list: [
+              {
+                name: '91助手',
+                url: 'http://weixin.com'
+              },
+              {
+                name: '产品助手',
+                url: 'http://twiter.com',
+                hot: true
+              },
+              {
+                name: '智能地图',
+                url: 'http://maps.com'
+              },
+              {
+                name: '团队语音',
+                url: 'http://phone.com'
+              }
+            ]
+          }
+        }
       }
     }
   }
