@@ -14,23 +14,23 @@
           <div v-if="!product.last" class="hr"></div>
         </template>
       </div>
-<!--       <div class="index-left-block lastest-news">
+      <div class="index-left-block lastest-news">
         <h2>最新消息</h2>
         <ul>
           <li v-for="item in newsList">
             <a :href="item.url" class="new-item">{{ item.title }}</a>
           </li>
         </ul>
-      </div> -->
+      </div>
     </div>
-<!--     <div class="index-right">
-      <carousel :navigationEnabled="true" :perPage="1" :autoplay="true">
+    <div class="index-right">
+<!--       <carousel :navigationEnabled="true" :perPage="1" :autoplay="true">
         <slide v-for="slide in slides" :key="slide.ky">
           <router-link :to="{name: slide.toKey}">
             <img :src="slide.src">
           </router-link>
         </slide>
-      </carousel>
+      </carousel> -->
       <div class="index-board-list">
         <div
         class="index-board-item"
@@ -45,14 +45,76 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script>
+  // import { Carousel, Slide } from 'vue-carousel';
+  import axios from 'axios';
+
   export default {
+    // components: {
+    //   Carousel,
+    //   Slide
+    // },
+    mounted () {
+      axios.get('/getNewsList')
+      .then((res) => {
+        console.log(res);
+        this.newsList = res.data.list;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
     data () {
       return {
+        boardList: [
+          {
+            title: '开放产品',
+            description: '开放产品是一款开放产品',
+            id: 'car',
+            saleout: false
+          },
+          {
+            title: '品牌营销',
+            description: '品牌营销帮助你更好的找到定位',
+            id: 'earth',
+            saleout: false
+          },
+          {
+            title: '使命必达',
+            description: '使命必达永远快速,保持最前端的技术',
+            id: 'loud',
+            saleout: true
+          },
+          {
+            title: '攀勇高峰',
+            description: '帮你攀勇高峰，到达事业顶峰',
+            id: 'hill',
+            saleout: false
+          }
+        ],
+        newsList: [
+          // {
+          //   title: '数据统计',
+          //   url: 'http://startcraft.com'
+          // },
+          //  {
+          //   title: '数据预测',
+          //   url: 'http://warcraft.com'
+          // },
+          // {
+          //   title: '数据分析',
+          //   url: 'http://overwatch.com',
+          //   hot: true
+          // },
+          // {
+          //   title: '广告发布',
+          //   url: 'http://hearstone.com'
+          // }
+        ],
         productList: {
           pc: {
             title: 'pc产品',

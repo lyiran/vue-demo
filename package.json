@@ -13,7 +13,9 @@
   "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.2.0",
+    "axios": "^0.18.0",
     "bable-loader": "0.0.1-security",
+    "mockjs": "^1.0.1-beta3",
     "vue": "^2.5.17"
   },
   "devDependencies": {
