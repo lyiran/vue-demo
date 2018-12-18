@@ -9,3 +9,5 @@ Mock.mock(/getNewsList/, {
     }
   ]
 });
+
+
