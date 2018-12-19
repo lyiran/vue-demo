@@ -2,7 +2,12 @@
   <div class="slide-show" @mouseover="clearInv" @mouseout="runInv">
     <div class="slide-img">
       <a :href="slides[nowIndex].href">
-        <img :src="slides[nowIndex].src">
+        <transition name="slide-trans">
+          <img v-if="isShow" :src="slides[nowIndex].src">
+        </transition>
+        <transition name="slide-trans-old">
+          <img v-if="!isShow" :src="slides[nowIndex].src">
+        </transition>
       </a>
     </div>
     <h2>{{ slides[nowIndex].title }}</h2>
@@ -29,7 +34,8 @@
     data () {
       return {
         nowIndex: 0,
-        inv: 1000
+        isShow: true,
+        inv: 2000
       }
     },
     computed: {
@@ -50,7 +56,12 @@
     },
     methods: {
       goto (index) {
-        this.nowIndex = index
+        this.isShow = false;
+        setTimeout(() => {
+          this.isShow = true;
+          this.nowIndex = index;
+        },10)
+        this.$emit('onchange', index);
       },
       runInv () {
         this.timer = setInterval(() => {
@@ -68,6 +79,16 @@
 </script>
 
 <style scoped>
+  .slide-trans-enter-active {
+    transition: all .5s;
+  }
+  .slide-trans-enter {
+    transform: translateX(900px);
+  }
+  .slide-trans-old-leave-active {
+    transition: all .5s;
+    transform: translateX(-900px);
+  }
   .slide-show {
     position: relative;
     margin: 15px 15px 15px 0;

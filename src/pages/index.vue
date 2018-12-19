@@ -31,7 +31,7 @@
           </router-link>
         </slide>
       </carousel> -->
-      <slide-show :slides="slides"></slide-show>
+      <slide-show :slides="slides" :inv="slidespeed" @onchange="doSomethingOnSlidechange"></slide-show>
       <div class="index-board-list">
         <div
         class="index-board-item"
@@ -59,6 +59,9 @@
     components: {
       slideShow
     },
+    methods: {
+      doSomethingOnSlidechange('doSomethingOnSlidechange run');
+    },
     mounted () {
       axios.get('/getNewsList')
       .then((res) => {
@@ -71,7 +74,7 @@
     },
     data () {
       return {
-        invTime: 2000,
+        slidespeed: 4000,
         slides: [
           {
             src: require('../assets/slideShow/pic1.jpg'),
