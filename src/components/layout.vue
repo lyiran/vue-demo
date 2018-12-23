@@ -5,11 +5,11 @@
         <img src="../assets/logo.png">
         <div class="head-nav">
           <ul class="nav-list">
-            <li>登录</li>
+            <li @click="logClick">登录</li>
             <li class="nav-pile">|</li>
-            <li>注册</li>
+            <li @click="regClick">注册</li>
             <li class="nav-pile">|</li>
-            <li>关于</li>
+            <li @click="aboutClick">关于</li>
           </ul>
         </div>
       </div>
@@ -19,16 +19,46 @@
         <router-view></router-view>
       </keep-alive>
     </content></div>
-    <div class="app-foot">footer</div>
+    <div class="app-foot">
+      <p>@ 2016 fishenal MIT</p>
+    </div>
+    <my-dialog :is-show="isShowAboutDialog" @on-close="closeDialog('isShowAboutDialog')">
+      <p>About</p>
+    </my-dialog>
+    <my-dialog :is-show="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
+      <p>Reg</p>
+    </my-dialog>
+    <my-dialog :is-show="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
+      <p>Log</p>
+    </my-dialog>
   </div>
 </template>
 
 <script>
+ import Dialog from './base/dialog.vue';
   export default {
+    components: {
+      MyDialog: Dialog
+    },
     data () {
       return {
-        msg: 'i am a app',
-        price: 5
+        isShowLogDialog: false,
+        isShowRegDialog: false,
+        isShowAboutDialog: false
+      }
+    },
+    methods: {
+      aboutClick () {
+        this.isShowAboutDialog = true;
+      },
+      logClick () {
+         this.isShowLogDialog = true;
+      },
+      regClick () {
+         this.isShowRegDialog = true;
+      },
+      closeDialog (attr) {
+        this[attr] = false;
       }
     }
   }

@@ -61,7 +61,6 @@
           this.isShow = true;
           this.nowIndex = index;
         },10)
-        this.$emit('onchange', index);
       },
       runInv () {
         this.timer = setInterval(() => {
