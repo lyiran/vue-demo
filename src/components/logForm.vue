@@ -4,25 +4,23 @@
       <div class="g-form-line">
         <span class="g-form-label">用户名：</span>
         <div class="g-form-input">
-          <input type="text" 
-          v-model="usernameModel" placeholder="请输入用户名">
+          <input type="text" placeholder="请输入用户名">
         </div>
-        <span class="g-form-error">{{ userErrors.errorText }}</span>
+        <span class="g-form-error"></span>
       </div>
       <div class="g-form-line">
         <span class="g-form-label">密码：</span>
         <div class="g-form-input">
-          <input type="password" 
-          v-model="passwordModel" placeholder="请输入密码">
+          <input type="password" placeholder="请输入密码">
         </div>
-        <span class="g-form-error">{{ passwordErrors.errorText }}</span>
+        <span class="g-form-error"></span>
       </div>
       <div class="g-form-line">
         <div class="g-form-btn">
-          <a class="button" @click="onLogin">登录</a>
+          <a class="button">登录</a>
         </div>
       </div>
-      <p>{{ errorText }}</p>
+      <p></p>
     </div>
   </div>
 </template>
@@ -33,7 +31,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>
 
