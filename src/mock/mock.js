@@ -10,4 +10,8 @@ Mock.mock(/getNewsList/, {
   ]
 });
 
+Mock.mock(/login/, {
+
+});
+
 
