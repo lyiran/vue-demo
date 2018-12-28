@@ -11,7 +11,9 @@ Mock.mock(/getNewsList/, {
 });
 
 Mock.mock(/login/, {
-
+  data: {
+    name: 'user11'
+  }
 });
 
 

@@ -5,13 +5,10 @@
         <img src="../assets/logo.png">
         <div class="head-nav">
           <ul class="nav-list">         
-            <li> {{ username }}</li>
-            <li v-if="username!== ''" class="nav-pile">|</li>
-            <li v-if="username!== ''" @click="quit">退出</li>
-            <li v-if="username=== ''" @click="logClick">登录</li>
+            <li @click="logClick">登录</li>
             <li class="nav-pile">|</li>
-            <li v-if="usrname === ''" @click="regClick">注册</li>
-            <li v-if="username=== ''" class="nav-pile">|</li>
+            <li @click="regClick">注册</li>
+            <li class="nav-pile">|</li>
             <li @click="aboutClick">关于</li>
           </ul>
         </div>
@@ -51,8 +48,7 @@
       return {
         isShowLogDialog: false,
         isShowRegDialog: false,
-        isShowAboutDialog: false,
-        username: ''
+        isShowAboutDialog: false
       }
     },
     methods: {
@@ -68,9 +64,8 @@
       closeDialog (attr) {
         this[attr] = false;
       },
-      onSuccessLog (data) {
-        this.closeDialog('isShowRegDialog');
-        this.username = data.name;
+      onSuccessLog () {
+        
       }
     }
   }

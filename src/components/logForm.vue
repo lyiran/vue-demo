@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data () {
     return {
@@ -78,12 +80,13 @@ export default {
         this.errorText = '部分选项未通过';
       } else {
         this.errorText = '';
-        this.$http.get('/login')
+        axios.get('/login')
         .then((res) => {
-          this.$emit('hsas-log', res.data);
-        }, (error) => {
-          console.log(error);
+          this.$emit('has-log', res);
         })
+        .catch((error) => {
+          console.log(error);
+        });
       }
     }
   }
