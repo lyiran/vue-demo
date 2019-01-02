@@ -14,6 +14,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),//项目的打包文件路径
+    publicPath: '/',
     // publicPath: 'http://127.0.0.1:3000/',//通过devServer访问路径
     filename: 'build.js'//打包后的文件名
     // filename: '[name].js'//打包后的文件名

@@ -80,7 +80,7 @@ export default {
         this.errorText = '部分选项未通过';
       } else {
         this.errorText = '';
-        axios.get('/login')
+        axios.get('/login',)
         .then((res) => {
           this.$emit('has-log', res);
         })
