@@ -10,7 +10,7 @@
                   产品类型：
               </div>
               <div class="sales-board-line-right">
-                  <v-chooser :selections="buyTypes"></v-chooser>
+                  <!-- <v-chooser :selections="buyTypes"></v-chooser> -->
               </div>
           </div>
           <div class="sales-board-line">
@@ -244,9 +244,40 @@
 </template>
 
 <script>
+import VSelection from "../../components/base/selection.vue";
 export default {
+  components: {
+    VSelection
+  },
   data () {
-    return {}
+  return {
+    districts: [
+      {
+        label: '北京',
+        value: 0
+      },
+      {
+        label: '上海',
+        value: 1
+      },
+      {
+        label: '广州',
+        value: 2
+      },
+      {
+        label: '天津',
+        value: 3
+      },
+      {
+        label: '武汉',
+        value: 4
+      },
+      {
+        label: '重庆',
+        value: 5
+      },
+    ]
+  }
   }
 }
 </script>
