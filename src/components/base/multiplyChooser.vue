@@ -1,13 +1,16 @@
 <template>
   <div class="chooser-component">
     <ul class="chooser-list">
-      <li v-for="(item, index) in selections" @click="chosenSelection(index)" 
+      <li 
+      v-for="(item, index) in selections"
+      @click="toggleSelection(index)" 
       :title="item.label" 
-      :class="{active:index === nowIndex}" >{{ item.label }}</li>
+      :class="{active: checkActive(index)}">{{ item.label }}</li>
     </ul>
   </div>
 </template>
 <script>
+import _ from 'lodash';
 export default {
   props: {
     selections: {
@@ -20,13 +23,25 @@ export default {
   },
   data () {
     return {
-      nowIndex: 0
+      nowIndexs: [0]
     }
   },
   methods: {
-    chosenSelection (index) {
-      this.nowIndex = index;
-      this.$emit('on-change', index);
+    toggleSelection (index) {
+      if (this.nowIndexs.indexOf(index) === -1) {
+        this.nowIndexs.push(index);
+      } else {
+        this.nowIndexs = _.remove(this.nowIndexs, (idx) => {
+          return idx !== index;
+        })
+      }
+      let nowObjArray = _.map(this.nowIndexs, (idx) => {
+        return this.selections[idx];
+      })
+      this.$emit('on-change', nowObjArray);
+    },
+    checkActive (index) {
+      return this.nowIndexs.indexOf(index) !== -1;
     }
   }
 }
@@ -53,4 +68,3 @@ export default {
   color: #fff;
 }
 </style>
-
