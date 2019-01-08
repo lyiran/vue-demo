@@ -11,6 +11,7 @@
               </div>
               <div class="sales-board-line-right">
                 <!-- <v-counter @on-change="onParamChange('buyNum', $event)"></v-counter> -->
+                <v-counter></v-counter>
               </div>
           </div>
           <div class="sales-board-line">
@@ -116,12 +117,14 @@
 <script>
 import VSelection from "../../components/base/selection.vue";
 import VChooser from "../../components/base/chooser.vue";
-import VMulChooser from '../../components/base/multiplyChooser.vue'
+import VMulChooser from '../../components/base/multiplyChooser.vue';
+import VCounter from '../../components/base/counter.vue';
 export default {
   components: {
     VSelection,
     VChooser,
-    VMulChooser
+    VMulChooser,
+    VCounter
   },
   data () {
     return {

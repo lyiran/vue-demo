@@ -18,7 +18,7 @@
                   媒介：
               </div>
               <div class="sales-board-line-right">
-                  <!-- <v-mul-chooser :selections="versionList"></v-mul-chooser> -->
+                  <v-mul-chooser :selections="versionList"></v-mul-chooser>
               </div>
           </div>
           <div class="sales-board-line">
@@ -58,10 +58,33 @@
 </template>
 
 <script>
+import VMulChooser from "../../components/base/multiplyChooser.vue";
 export default {
-  data () {
-    return {}
-  }
+    components: {
+        VMulChooser
+    },
+    data () {
+        return {
+            versionList: [
+                {
+                label: '纸质报告',
+                value: 0
+                },
+                {
+                label: 'pdf',
+                value: 1
+                },
+                {
+                label: '页面报告',
+                value: 2
+                },
+                {
+                label: '邮件',
+                value: 3
+                }
+            ]
+        }
+    }
 }
 </script>
 
