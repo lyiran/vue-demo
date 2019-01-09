@@ -10,8 +10,7 @@
                   购买数量：
               </div>
               <div class="sales-board-line-right">
-                <!-- <v-counter @on-change="onParamChange('buyNum', $event)"></v-counter> -->
-                <v-counter></v-counter>
+                <v-counter @on-change="onParamChange('buyNum', $event)"></v-counter>
               </div>
           </div>
           <div class="sales-board-line">
@@ -128,6 +127,7 @@ export default {
   },
   data () {
     return {
+      buyNum: 0,
       versionList: [
         {
           label: '客户版',

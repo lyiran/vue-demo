@@ -9,7 +9,52 @@
 </template>
 <script>
 export default {
-
+  props: {
+    max: {
+      type: Number,
+      default: 5
+    },
+    min: {
+      type: Number,
+      default: 1
+    }
+  },
+  data () {
+    return {
+      number: this.min
+    }
+  },
+  watch: {//watch监听数据变化
+    number () {
+      this.$emit('on-change', this.number);
+    }
+  },
+  methods: {
+    fixNumber () {
+      let fix;
+      if (typeof this.number === 'string') {
+        fix = Number(this.number.replace(/\D/g, ''));//把非数字的字符串替换为空
+      } else {
+        fix = this.number;
+      }
+      if (fix > this.max || fix < this.min) {
+        fix = this.min;
+      }
+      this.number = fix;
+    },
+    minus () {
+      if (this.number <= this.min) {
+        return;
+      }
+      this.number--;
+    },
+    add () {
+      if (this.number >= this.max) {
+        return;
+      }
+      this.number++;
+    }
+  }
 }
 </script>
 <style>
