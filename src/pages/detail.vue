@@ -161,4 +161,14 @@ export default {
       border: 1px solid #f0f2f5;
       padding: 15px;
   }
+  .button {
+    height: 30px;
+    width: 100px;
+    background: #4fc08d;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 </style>

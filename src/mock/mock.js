@@ -10,10 +10,14 @@ Mock.mock(/getNewsList/, {
   ]
 });
 
-Mock.mock(/login/, {
-  data: {
-    name: 'user11'
-  }
+Mock.mock(/getPrice/, {
+  "amount": 678
 });
+
+// Mock.mock(/login/, {
+//   data: {
+//     name: 'user11'
+//   }
+// });
 
 

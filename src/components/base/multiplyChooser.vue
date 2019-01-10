@@ -37,7 +37,7 @@ export default {
       }
       let nowObjArray = _.map(this.nowIndexs, (idx) => {
         return this.selections[idx];
-      })
+      });
       this.$emit('on-change', nowObjArray);
     },
     checkActive (index) {

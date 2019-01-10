@@ -19,7 +19,7 @@
               </div>
               <div class="sales-board-line-right">
                   <v-selection :selections="productTypes" 
-                  @on-change=""></v-selection>
+                  @on-change="onParamChange('buyType', $event)"></v-selection>
               </div>
           </div>
           <div class="sales-board-line">
@@ -47,7 +47,7 @@
                   总价：
               </div>
               <div class="sales-board-line-right">
-                   元
+                 {{ price }}  元
               </div>
           </div>
           <div class="sales-board-line">
@@ -118,6 +118,8 @@ import VSelection from "../../components/base/selection.vue";
 import VChooser from "../../components/base/chooser.vue";
 import VMulChooser from '../../components/base/multiplyChooser.vue';
 import VCounter from '../../components/base/counter.vue';
+import axios from 'axios'; 
+import _ from 'lodash';
 export default {
   components: {
     VSelection,
@@ -128,6 +130,10 @@ export default {
   data () {
     return {
       buyNum: 0,
+      buyType: {},
+      versions: [],
+      period: {},
+      price: 0,
       versionList: [
         {
           label: '客户版',
@@ -175,6 +181,29 @@ export default {
   methods: {
     onParamChange (attr, val) {
       this[attr] = val;
+      // console.log(attr, this[attr]);
+      this.getPrice();
+    },
+    getPrice () {
+      let buyVersionsArray = _.map(this.versions, (item) => {
+        return item.value;
+      });
+      let reqParams = {
+        buyNumber: this.buyNum,
+        buyType: this.buyType.value,
+        period: this.period.value,
+        versions: buyVersionsArray.join(',')
+      };
+      axios.post('/getPrice', reqParams)
+      .then((res) => {
+        console.log(res.data);
+        let data = res.data;
+        // console.log(data.amount);
+        this.price = data.amount;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     }
   }
 }
