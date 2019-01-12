@@ -205,6 +205,13 @@ export default {
         console.log(err);
       });
     }
+  },
+  mounted () {
+    this.buyNum = 0;
+    this.buyType = this.productTypes[0];
+    this.versions = [this.versionList[0]];
+    this.period = this.periodList[0];
+    this.getPrice();
   }
 }
 </script>

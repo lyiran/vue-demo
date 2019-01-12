@@ -14,6 +14,9 @@ Mock.mock(/getPrice/, {
   "amount": 678
 });
 
+Mock.mock(/getCount/, {
+  "amount": 800
+});
 // Mock.mock(/login/, {
 //   data: {
 //     name: 'user11'
