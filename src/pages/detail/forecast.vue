@@ -35,7 +35,7 @@
             总价：
           </div>
           <div class="sales-board-line-right">
-            500 元
+            {{ price }} 元
           </div>
         </div>
         <div class="sales-board-line">
@@ -72,6 +72,7 @@ export default {
     return {
       buyNum: 0,
       versions: [],
+      price: 0,
       versionList: [
         {
         label: '纸质报告',
@@ -95,7 +96,31 @@ export default {
   methods: {
     onParamChange (attr, val) {
       this[attr] = val;
+      this.getPrice();
+    },
+    getPrice () {
+      let buyVersionsArray = _.map(this.versions, (item) => {
+        return item.value;
+      });
+      let reqParams = {
+        buyNumber: this.buyNum,
+        versions: buyVersionsArray.join(',')
+      };
+      console.log(reqParams);
+      axios.post('/getFocast', reqParams)
+      .then((res) => {
+        let data = res.data;
+        this.price = data.forecast;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     }
+  },
+  mounted () {
+    this.buyNum = 20;
+    this.versions = [this.versionList[1]];
+    this.getPrice();
   }
 }
 </script>

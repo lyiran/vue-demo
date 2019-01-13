@@ -196,7 +196,6 @@ export default {
       };
       axios.post('/getPrice', reqParams)
       .then((res) => {
-        console.log(res.data);
         let data = res.data;
         // console.log(data.amount);
         this.price = data.amount;
