@@ -53,7 +53,7 @@
           <div class="sales-board-line">
               <div class="sales-board-line-left">&nbsp;</div>
               <div class="sales-board-line-right">
-                  <div class="button">
+                  <div class="button" @click="showPayDialog">
                     立即购买
                   </div>
               </div>
@@ -81,6 +81,9 @@
           <li>用户所在地理区域分布状况等</li>
         </ul>
       </div>
+      <my-dialog :is-show="isShowPayDialog">
+        test
+      </my-dialog>
       <!-- <my-dialog :is-show="isShowPayDialog" @on-close="hidePayDialog">
         <table class="buy-dialog-table">
           <tr>
@@ -118,6 +121,7 @@ import VSelection from "../../components/base/selection.vue";
 import VChooser from "../../components/base/chooser.vue";
 import VMulChooser from '../../components/base/multiplyChooser.vue';
 import VCounter from '../../components/base/counter.vue';
+import myDialog from '../../components/base/dialog.vue';
 import axios from 'axios'; 
 import _ from 'lodash';
 export default {
@@ -125,7 +129,8 @@ export default {
     VSelection,
     VChooser,
     VMulChooser,
-    VCounter
+    VCounter,
+    myDialog
   },
   data () {
     return {
@@ -175,7 +180,8 @@ export default {
           label: '高级版',
           value: 2
         }
-      ]
+      ],
+      isShowPayDialog: false
     }
   },
   methods: {
@@ -203,6 +209,9 @@ export default {
       .catch((err) => {
         console.log(err);
       });
+    },
+    showPayDialog () {
+      this.isShowPayDialog = true;
     }
   },
   mounted () {
