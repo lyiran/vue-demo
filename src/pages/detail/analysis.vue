@@ -81,8 +81,29 @@
           <li>用户所在地理区域分布状况等</li>
         </ul>
       </div>
-      <my-dialog :is-show="isShowPayDialog">
-        test
+      <my-dialog :is-show="isShowPayDialog" @on-close="hidePayDialog">
+        <table class="buy-dialog-table">
+          <tr>
+            <th>购买数量</th>
+            <th>产品类型</th>
+            <th>有效时间</th>
+            <th>产品版本</th>
+            <th>总价</th>
+          </tr>
+          <tr>
+            <td>{{ buyNum }}</td>
+            <td>{{ buyType.label }}</td>
+            <td>{{ period.label }}</td>
+            <td>
+              <span v-for="item in versions">{{ item.label }}</span>
+            </td>
+            <td>{{ price }}</td>
+          </tr>
+        </table>
+        <h3 class="buy-dialog-title">请选择银行</h3>
+        <bank-chooser></bank-chooser>
+        <!-- <bank-chooser @on-change="getBnkId"></bank-chooser> -->
+        <div class="button buy-dialog-btn" @click="confirmBuy">确认购买</div>
       </my-dialog>
       <!-- <my-dialog :is-show="isShowPayDialog" @on-close="hidePayDialog">
         <table class="buy-dialog-table">
@@ -134,7 +155,7 @@ export default {
   },
   data () {
     return {
-      buyNum: 0,
+      buyNum: 1,
       buyType: {},
       versions: [],
       period: {},
@@ -212,10 +233,13 @@ export default {
     },
     showPayDialog () {
       this.isShowPayDialog = true;
+    },
+    hidePayDialog () {
+      this.isShowPayDialog = false;
     }
   },
   mounted () {
-    this.buyNum = 0;
+    this.buyNum = 1;
     this.buyType = this.productTypes[0];
     this.versions = [this.versionList[0]];
     this.period = this.periodList[0];
