@@ -24,6 +24,10 @@ Mock.mock(/getFocast/, {
 Mock.mock(/getPublish/, {
   "pubPrice": 450
 });
+
+Mock.mock(/createOrder/, {
+  "orderID": 1
+});
 // Mock.mock(/login/, {
 //   data: {
 //     name: 'user11'

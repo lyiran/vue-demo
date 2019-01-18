@@ -101,9 +101,10 @@
           </tr>
         </table>
         <h3 class="buy-dialog-title">请选择银行</h3>
-        <bank-chooser></bank-chooser>
+        <bank-chooser @on-change="onChangeBanks"></bank-chooser>
         <!-- <bank-chooser @on-change="getBnkId"></bank-chooser> -->
-        <div class="button buy-dialog-btn" @click="confirmBuy">确认购买</div>
+        <!-- <div class="button buy-dialog-btn" @click="confirmBuy">确认购买</div> -->
+         <div class="button buy-dialog-btn" @click="confirmBuy">确认购买</div>
       </my-dialog>
       <!-- <my-dialog :is-show="isShowPayDialog" @on-close="hidePayDialog">
         <table class="buy-dialog-table">
@@ -143,6 +144,7 @@ import VChooser from "../../components/base/chooser.vue";
 import VMulChooser from '../../components/base/multiplyChooser.vue';
 import VCounter from '../../components/base/counter.vue';
 import myDialog from '../../components/base/dialog.vue';
+import BankChooser from '../../components/bankChooser.vue';
 import axios from 'axios'; 
 import _ from 'lodash';
 export default {
@@ -151,7 +153,8 @@ export default {
     VChooser,
     VMulChooser,
     VCounter,
-    myDialog
+    myDialog,
+    BankChooser
   },
   data () {
     return {
@@ -202,7 +205,8 @@ export default {
           value: 2
         }
       ],
-      isShowPayDialog: false
+      isShowPayDialog: false,
+      bankId: null
     }
   },
   methods: {
@@ -236,6 +240,30 @@ export default {
     },
     hidePayDialog () {
       this.isShowPayDialog = false;
+    },
+    onChangeBanks (bankObj) {
+      this.bankId = bankObj.id;
+      console.log(bankObj.id);
+    },
+    confirmBuy () {
+      let buyVersionsArray = _.map(this.versions, (item) => {
+        return item.value;
+      });
+      let reqParams = {
+        buyNumber: this.buyNum,
+        buyType: this.buyType.value,
+        period: this.period.value,
+        versions: buyVersionsArray.join(','),
+        bankId: this.bankId
+      };
+      console.log(reqParams);
+      axios.post('/createOrder', reqParams)
+      .then((res) => {
+        this.orderId = res.data.orderId;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     }
   },
   mounted () {
