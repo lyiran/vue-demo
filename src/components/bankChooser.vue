@@ -70,9 +70,7 @@ export default {
   position: relative;
   display: inline-block;
 }
-.chooser-list li.active {
-  border: 1px solid #4fc08d;
-}
+
 .chooser-list li { 
   display: inline-block;
   width: 117px;
@@ -143,5 +141,9 @@ export default {
 
 .baifubao {
   background-position: -1320px 0;
+}
+
+.chooser-list li.active {
+  border: 1px solid #4fc08d;
 }
 </style>

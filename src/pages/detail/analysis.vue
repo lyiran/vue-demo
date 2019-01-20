@@ -106,6 +106,9 @@
         <!-- <div class="button buy-dialog-btn" @click="confirmBuy">确认购买</div> -->
          <div class="button buy-dialog-btn" @click="confirmBuy">确认购买</div>
       </my-dialog>
+      <my-dialog :is-show="isShowErrDialog" @on-close="hideErrDialog"></my-dialog>
+      <check-order :is-show-check-dialog="isShowCheckOrder" 
+      @on-close-check-dialog="hideCheckDialog"></check-order>
       <!-- <my-dialog :is-show="isShowPayDialog" @on-close="hidePayDialog">
         <table class="buy-dialog-table">
           <tr>
@@ -145,6 +148,7 @@ import VMulChooser from '../../components/base/multiplyChooser.vue';
 import VCounter from '../../components/base/counter.vue';
 import myDialog from '../../components/base/dialog.vue';
 import BankChooser from '../../components/bankChooser.vue';
+import checkOrder from '../../components/checkOrder.vue';
 import axios from 'axios'; 
 import _ from 'lodash';
 export default {
@@ -154,7 +158,8 @@ export default {
     VMulChooser,
     VCounter,
     myDialog,
-    BankChooser
+    BankChooser,
+    checkOrder
   },
   data () {
     return {
@@ -206,7 +211,9 @@ export default {
         }
       ],
       isShowPayDialog: false,
-      bankId: null
+      bankId: null,
+      isShowCheckOrder: false,
+      isShowErrDialog: false
     }
   },
   methods: {
@@ -241,6 +248,12 @@ export default {
     hidePayDialog () {
       this.isShowPayDialog = false;
     },
+    hideErrDialog () {
+      this.isShowErrDialog = false;
+    },
+    hideCheckDialog () {
+      this.isShowCheckOrder = false;
+    },
     onChangeBanks (bankObj) {
       this.bankId = bankObj.id;
       console.log(bankObj.id);
@@ -260,9 +273,12 @@ export default {
       axios.post('/createOrder', reqParams)
       .then((res) => {
         this.orderId = res.data.orderId;
+        this.isShowPayDialog = false;
+        this.isShowCheckOrder = true;
       })
       .catch((err) => {
-        console.log(err);
+        this.isShowPayDialog = false;
+        this.isShowErrDialog = true;
       });
     }
   },
